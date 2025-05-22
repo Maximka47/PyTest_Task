@@ -20,4 +20,3 @@ class UserActions:
         self.signpage.click_register_button()
 
         self.createdpage.check_account_created_and_continue()
-        self.homepage.logout()
