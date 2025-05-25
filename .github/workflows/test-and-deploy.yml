@@ -54,21 +54,13 @@ jobs:
       - name: Send Slack Notification
         if: always()
         run: |
-          passed=0
-          failed=0
+          sudo apt-get update && sudo apt-get install -y jq
 
-          if [ -d allure-results ]; then
-            for file in reports/allure-results/*.json; do
-              if jq -e '.status' "$file" > /dev/null; then
-                status=$(jq -r '.status' "$file")
-                if [ "$status" = "passed" ]; then
-                  passed=$((passed + 1))
-                elif [ "$status" = "failed" ]; then
-                  failed=$((failed + 1))
-                fi
-              fi
-            done
-          fi
+          passed=$(find reports/allure-results -name '*.json' -exec jq -r 'select(.status? == "passed" and .labels and .name)' {} \; | wc -l)
+          failed=$(find reports/allure-results -name '*.json' -exec jq -r 'select(.status? == "failed" and .labels and .name)' {} \; | wc -l)
+
+          echo "✅ Passed: $passed"
+          echo "❌ Failed: $failed"
 
           curl -X POST -H 'Content-type: application/json' \
             --data '{
