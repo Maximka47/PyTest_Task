@@ -56,8 +56,8 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y jq
 
-          passed=$(find reports/allure-results -name '*.json' -exec jq -r 'select(.status? == "passed" and .labels and .name)' {} \; | wc -l)
-          failed=$(find reports/allure-results -name '*.json' -exec jq -r 'select(.status? == "failed" and .labels and .name)' {} \; | wc -l)
+          passed=$(find allure-results -name '*.json' -exec jq -r 'select(.status == "passed" and .stage == "finished" and .name and .labels)' {} \; | wc -l)
+          failed=$(find allure-results -name '*.json' -exec jq -r 'select(.status == "failed" and .stage == "finished" and .name and .labels)' {} \; | wc -l)
 
           echo "✅ Passed: $passed"
           echo "❌ Failed: $failed"
