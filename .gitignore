@@ -1,3 +1,2 @@
-# Ignore build artifacts
+.idea/
 reports/
-.idea

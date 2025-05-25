@@ -5,7 +5,7 @@
 
 ## 📘 Project Description
 
-This project is a web UI test automation suite built using **Pytest**, **Playwright**, and **Allure** for [https://automationexercise.com/](https://automationexercise.com/).
+This project is a web UI test automation suite built using **Pytest**,  **Playwright**, and **Allure** for [https://automationexercise.com/](https://automationexercise.com/).
 It verifies key functionalities like registration, login, product search, contact form submission, and more using modular test design, fixtures, and rich reporting.
 
 ---
