@@ -12,9 +12,9 @@ jobs:
     continue-on-error: true
 
     env:
-      VALID_USER_EMAIL: ${{ secrets.VALID_USER_EMAIL }}
-      VALID_USER_PASSWORD: ${{ secrets.VALID_USER_PASSWORD }}
-      VALID_USER_NAME: ${{ secrets.VALID_USER_NAME }}
+      SECRET_EMAIL: ${{ secrets.SECRET_EMAIL }}
+      SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
+      SECRET_NAME: ${{ secrets.SECRET_NAME }}
 
     steps:
       - name: Checkout repository
