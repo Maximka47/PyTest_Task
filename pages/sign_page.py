@@ -86,8 +86,9 @@ class SignPage:
     def login_incorrect(self) -> None:
         self.__login_email.fill(invalid_user['email'])
         self.__login_password.fill(invalid_user['password'])
-        capture_screenshot(self.page, 'login_incorrect')
         self.__login_button.click()
+        capture_screenshot(self.page, 'login_incorrect')
+
 
     def check_incorrect_login_label_visibility(self) -> None:
         assert self.__incorrect_login_label.is_visible()
