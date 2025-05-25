@@ -6,6 +6,7 @@ from playwright.sync_api import sync_playwright
 passed_tests = []
 failed_tests = []
 
+@pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     result = outcome.get_result()
@@ -18,7 +19,7 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.hookimpl(trylast=True)
 def pytest_sessionfinish(session, exitstatus):
-    """ Print the test summary to a file for CI/CD use (e.g., Slack notifications) """
+    """Print the test summary to a file for CI/CD use (e.g., Slack notifications)"""
     summary = {
         "passed": len(passed_tests),
         "failed": len(failed_tests),
