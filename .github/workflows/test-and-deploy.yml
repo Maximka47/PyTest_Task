@@ -48,6 +48,9 @@ jobs:
           publish_dir: reports/allure-report
           publish_branch: gh-pages
 
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Send Slack Notification
         if: always()
         run: |
