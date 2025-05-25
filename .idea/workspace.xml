@@ -4,26 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1248a923-e599-43a3-a0a5-d70bda0f7bb8" name="Changes" comment="project start">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/test-and-deploy.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/upload_file.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/contact_us_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/products_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/testcases_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_contact_us.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_subscription.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_testcases.py" afterDir="false" />
+    <list default="true" id="1248a923-e599-43a3-a0a5-d70bda0f7bb8" name="Changes" comment="update action">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/test-and-deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/test-and-deploy.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/user_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/user_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account_created_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account_created_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/deleteAccount_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/delete_account_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/home_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/home_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/sign_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sign_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_account_register_and_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_account_register_and_login.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +203,7 @@
       <workItem from="1748004933963" duration="2026000" />
       <workItem from="1748125593809" duration="2964000" />
       <workItem from="1748128588264" duration="7962000" />
-      <workItem from="1748197798649" duration="1543000" />
+      <workItem from="1748197798649" duration="1862000" />
     </task>
     <task id="LOCAL-00001" summary="project start">
       <option name="closed" value="true" />
@@ -229,7 +213,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747827759238</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add action">
+      <option name="closed" value="true" />
+      <created>1748199417364</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1748199417364</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update action">
+      <option name="closed" value="true" />
+      <created>1748199549585</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1748199549585</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,7 +237,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="project start" />
-    <option name="LAST_COMMIT_MESSAGE" value="project start" />
+    <MESSAGE value="add action" />
+    <MESSAGE value="update action" />
+    <option name="LAST_COMMIT_MESSAGE" value="update action" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PyTest_Task$.coverage" NAME=" Coverage Results" MODIFIED="1748138808047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
