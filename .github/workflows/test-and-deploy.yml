@@ -51,8 +51,8 @@ jobs:
       - name: Send Slack Notification
         if: always()
         run: |
-          passed=$(grep -o '"status":"passed"' reports/allure-results/*.json | wc -l || true)
-          failed=$(grep -o '"status":"failed"' reports/allure-results/*.json | wc -l || true)
+          passed=$(grep -o '"status": "passed"' reports/allure-results/*.json | wc -l || true)
+          failed=$(grep -o '"status": "failed"' reports/allure-results/*.json | wc -l || true)
 
           curl -X POST -H 'Content-type: application/json' \
             --data '{
