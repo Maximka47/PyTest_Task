@@ -51,34 +51,56 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Send Slack Notification
+      - name: Send Slack Notification (Grouped by Feature)
         if: always()
         run: |
-          sudo apt-get update && sudo apt-get install -y jq
+          
+          declare -A passed_by_suite
+          declare -A failed_by_suite
 
-          passed=$(find reports/allure-results -name '*.json' -exec jq -r 'select(.status == "passed" and .stage == "finished" and .name and .labels)' {} \; | wc -l)
-          failed=$(find reports/allure-results -name '*.json' -exec jq -r 'select(.status == "failed" and .stage == "finished" and .name and .labels)' {} \; | wc -l)
+          for file in reports/allure-results/*.json; do
+            if jq -e '.status and .stage == "finished" and .name and .labels' "$file" > /dev/null; then
+              suite=$(jq -r '.labels[] | select(.name == "parentSuite") | .value' "$file")
+              status=$(jq -r '.status' "$file")
+              [ -z "$suite" ] && suite="Uncategorized"
+              if [[ "$status" == "passed" ]]; then
+                ((passed_by_suite["$suite"]++))
+              elif [[ "$status" == "failed" ]]; then
+                ((failed_by_suite["$suite"]++))
+              fi
+            fi
+          done
 
-          echo "✅ Passed: $passed"
-          echo "❌ Failed: $failed"
+          
+          fields=""
+          for suite in "${!passed_by_suite[@]}" "${!failed_by_suite[@]}"; do
+            pass=${passed_by_suite[$suite]:-0}
+            fail=${failed_by_suite[$suite]:-0}
+            fields="$fields,
+              {
+                \"title\": \"$suite\",
+                \"value\": \"✅ $pass  ❌ $fail\",
+                \"short\": false
+              }"
+          done
+
+          total_pass=$(IFS=+; echo "$(( ${passed_by_suite[@]} ))")
+          total_fail=$(IFS=+; echo "$(( ${failed_by_suite[@]} ))")
 
           curl -X POST -H 'Content-type: application/json' \
-            --data '{
-              "text": "*🎭 Playwright Test Summary*",
-              "attachments": [
+            --data "{
+              \"text\": \"*🎭 Playwright Test Summary*\",
+              \"attachments\": [
                 {
-                  "color": "'$(if [ "$failed" -eq 0 ]; then echo good; else echo danger; fi)'",
-                  "fields": [
-                    { "title": "✅ Passed", "value": "'"$passed"'", "short": true },
-                    { "title": "❌ Failed", "value": "'"$failed"'", "short": true }
-                  ],
-                  "actions": [
+                  \"color\": \"$(if [ \"$total_fail\" -eq 0 ]; then echo good; else echo danger; fi)\",
+                  \"fields\": [ ${fields:1} ],
+                  \"actions\": [
                     {
-                      "type": "button",
-                      "text": "📊 View Report",
-                      "url": "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+                      \"type\": \"button\",
+                      \"text\": \"📊 View Report\",
+                      \"url\": \"https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/\"
                     }
                   ]
                 }
               ]
-            }' ${{ secrets.SLACK_WEBHOOK_URL }}
+            }" ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,4 +1,3 @@
 # Ignore build artifacts
-reports/allure-results/
-reports/allure-report/
+reports/
 .idea
