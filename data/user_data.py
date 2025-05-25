@@ -1,9 +1,9 @@
 import os
 
 valid_user = {
-    "name": os.getenv("SECRET_NAME"),
-    "email": os.getenv("SECRET_EMAIL"),
-    "password": os.getenv("SECRET_PASSWORD"),
+    "name": "John",
+    "email": "johntestexample@proton.me",
+    "password": "John_1984_Test",
     "address": "123 Test St, QA City",
     "first_name": "John",
     "last_name": "Smith",
