@@ -1,5 +1,3 @@
-import os
-
 valid_user = {
     "name": "John",
     "email": "johntestexample@proton.me",

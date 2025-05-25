@@ -1,5 +1,3 @@
-import os.path
-
 import pytest
 
 from pages.contact_us_page import ContactPage
