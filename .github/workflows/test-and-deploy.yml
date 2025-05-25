@@ -27,7 +27,7 @@ jobs:
         run: |
           pip install pipenv
           pipenv install
-          pipenv run palywright install
+          pipenv run playwright install
 
       - name: Run tests with Allure
         run: pipenv run pytest
