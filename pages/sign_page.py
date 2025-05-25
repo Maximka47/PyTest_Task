@@ -1,4 +1,6 @@
 from playwright.sync_api import Page
+
+from conftest import capture_screenshot
 from data.user_data import valid_user
 from data.user_data import invalid_user
 
@@ -46,14 +48,13 @@ class SignPage:
     def fill_new_user_signup(self) -> None:
         self.__new_user_name.fill(valid_user['name'])
         self.__new_user_email.fill(valid_user['email'])
-        self.page.screenshot(path="./register/new_user_signup_form_filled.png", full_page=True)
+        capture_screenshot(self.page, 'fill_new_user_signup')
         self.__new_user_signup_btn.click()
 
 
     def fill_signup_form(self) -> None:
         self.__radio_male.check()
-        # self.__form_name.fill(valid_user['name'])
-        # self.__form_email.fill(valid_user['email'])
+
         self.__form_password.fill(valid_user['password'])
         self.__select_days.select_option(value='1')
         self.__select_months.select_option(value='1')
@@ -69,7 +70,7 @@ class SignPage:
         self.__form_city.fill(valid_user['city'])
         self.__form_zip.fill(valid_user['zip'])
         self.__form_mobile.fill(valid_user['mobile_number'])
-        self.page.screenshot(path="./register/signup_form_filled.png", full_page=True)
+        capture_screenshot(self.page, 'fill_signup_form')
 
     def click_register_button(self) -> None:
         self.__create_btn.click()
@@ -80,25 +81,29 @@ class SignPage:
     def login_correct(self) -> None:
         self.__login_email.fill(valid_user['email'])
         self.__login_password.fill(valid_user['password'])
+        capture_screenshot(self.page, 'login_correct')
         self.__login_button.click()
 
     def login_incorrect(self) -> None:
         self.__login_email.fill(invalid_user['email'])
         self.__login_password.fill(invalid_user['password'])
+        capture_screenshot(self.page, 'login_incorrect')
         self.__login_button.click()
 
     def check_incorrect_login_label_visibility(self) -> None:
         assert self.__incorrect_login_label.is_visible()
         assert "incorrect" in self.__incorrect_login_label.text_content()
+        capture_screenshot(self.page, 'check_incorrect_login_label_visibility')
 
     def check_signup_error_message(self) -> None:
         assert self.__signup_error_message.is_visible()
         assert self.__signup_error_message.text_content() == 'Email Address already exist!'
+        capture_screenshot(self.page, 'check_signup_error_message')
 
     def fill_signup_with_existing_email(self):
         self.__new_user_email.fill(valid_user['email'])
         self.__new_user_name.fill("Josh")
+        capture_screenshot(self.page, 'fill_signup_with_existing_email')
         self.__new_user_signup_btn.click()
-
 
 

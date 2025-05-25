@@ -1,7 +1,9 @@
+import os
+
 valid_user = {
-    "name": "John",
-    "email": "johntestexample@proton.me",
-    "password": "John_1984_Test",
+    "name": os.getenv("SECRET_NAME"),
+    "email": os.getenv("SECRET_EMAIL"),
+    "password": os.getenv("SECRET_PASSWORD"),
     "address": "123 Test St, QA City",
     "first_name": "John",
     "last_name": "Smith",
@@ -10,11 +12,13 @@ valid_user = {
     "city": "Cupertino",
     "zip": "94024",
     "mobile_number": "+987654321",
+    "subject": "Test Subject",
+    "message": "Test Message",
 
 }
 
 invalid_user = {
-    "email": "johntestexample@proton.m",
+    "email": "johntestexample@proton.me",
     "password": "12345",
     "address": ""
 }

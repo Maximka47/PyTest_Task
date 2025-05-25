@@ -3,7 +3,7 @@ import pytest
 from pages.home_page import HomePage
 from pages.sign_page import SignPage
 from pages.account_created_page import CreatedPage
-from pages.deleteAccount_page import DeletePage
+from pages.delete_account_page import DeletePage
 from utils.actions import UserActions
 
 
@@ -82,3 +82,10 @@ class TestRegisterAndLogin:
         self.signpage.check_new_user_label_visibility()
         self.signpage.fill_signup_with_existing_email()
         self.signpage.check_signup_error_message()
+
+    def test_clear_up(self, test_setup):
+        self.homepage.click_signup_login_button()
+        self.signpage.login_correct()
+        self.homepage.check_logged_in()
+        self.homepage.click_delete_account_btn()
+        self.deletedpage.check_account_deleted_and_continue()

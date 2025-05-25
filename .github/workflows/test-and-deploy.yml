@@ -1,0 +1,76 @@
+name: Run Playwright Tests and Publish Allure Report
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    env:
+      VALID_USER_EMAIL: ${{ secrets.VALID_USER_EMAIL }}
+      VALID_USER_PASSWORD: ${{ secrets.VALID_USER_PASSWORD }}
+      VALID_USER_NAME: ${{ secrets.VALID_USER_NAME }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install Pipenv & dependencies
+        run: |
+          pip install pipenv
+          pipenv install --dev
+
+      - name: Install Playwright Browsers
+        run: pipenv run playwright install --with-deps
+
+      - name: Run tests with Allure
+        run: pipenv run pytest
+
+      - name: Install Allure CLI
+        run: |
+          npm install -g allure-commandline --save-dev
+
+      - name: Generate Allure Report
+        run: allure generate reports/allure-results -o reports/allure-report --clean
+
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: reports/allure-report
+          publish_branch: gh-pages
+
+      - name: Send Slack Notification
+        if: always()
+        run: |
+          passed=$(grep -o '"status":"passed"' allure-results/*.json | wc -l || true)
+          failed=$(grep -o '"status":"failed"' allure-results/*.json | wc -l || true)
+
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{
+              "text": "*🎭 Playwright Test Summary*",
+              "attachments": [
+                {
+                  "color": "'$(if [ "$failed" -eq 0 ]; then echo good; else echo danger; fi)'",
+                  "fields": [
+                    { "title": "✅ Passed", "value": "'"$passed"'", "short": true },
+                    { "title": "❌ Failed", "value": "'"$failed"'", "short": true }
+                  ],
+                  "actions": [
+                    {
+                      "type": "button",
+                      "text": "📊 View Report",
+                      "url": "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+                    }
+                  ]
+                }
+              ]
+            }' ${{ secrets.SLACK_WEBHOOK_URL }}
