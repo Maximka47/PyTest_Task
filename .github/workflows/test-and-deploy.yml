@@ -26,7 +26,7 @@ jobs:
       - name: Install Pipenv & dependencies
         run: |
           pip install pipenv
-          pipenv install --dev
+          pipenv install --deploy --ignore-pipfile
 
       - name: Run tests with Allure
         run: pipenv run pytest
