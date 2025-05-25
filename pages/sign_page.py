@@ -54,7 +54,6 @@ class SignPage:
 
     def fill_signup_form(self) -> None:
         self.__radio_male.check()
-
         self.__form_password.fill(valid_user['password'])
         self.__select_days.select_option(value='1')
         self.__select_months.select_option(value='1')
